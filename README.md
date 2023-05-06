@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repo contains PyTorch implementation for paper [DSPDet3D: Dynamic Spatial Pruning for 3D Small Object Detection](http://arxiv.org/abs/xxx) based on [MMDetection3D](https://github.com/open-mmlab/mmdetection3d).
+This repo contains PyTorch implementation for paper [DSPDet3D: Dynamic Spatial Pruning for 3D Small Object Detection](https://xuxw98.github.io/files/DSPDet3D.pdf) based on [MMDetection3D](https://github.com/open-mmlab/mmdetection3d).
 
 > DSPDet3D: Dynamic Spatial Pruning for 3D Small Object Detection  
 > [Xiuwei Xu](https://xuxw98.github.io/), Zhihao Sun, [Ziwei Wang](https://ziweiwangthu.github.io/), Hongmin Liu, [Jie Zhou](https://scholar.google.com/citations?user=6a79aPwAAAAJ&hl=en&authuser=1), [Jiwen Lu](http://ivg.au.tsinghua.edu.cn/Jiwen_Lu/)
