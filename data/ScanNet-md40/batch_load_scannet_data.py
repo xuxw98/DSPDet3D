@@ -77,9 +77,6 @@ def export_one_scan(scan_name,
         np.save(f'{output_filename_prefix}_axis_align_matrix.npy',
                 axis_align_matrix)
 
-        np.save(f'{output_filename_prefix}_unaligned_bbox_sem.npy', unaligned_bboxes_sem)
-        np.save(f'{output_filename_prefix}_aligned_bbox_sem.npy', aligned_bboxes_sem)
-
 
 def batch_export(max_num_point,
                  output_folder,
