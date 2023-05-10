@@ -134,7 +134,7 @@ def main():
         help='The path of label map file.')
     parser.add_argument(
         '--train_scan_names_file',
-        default="/path/scannet/meta_data/scannetv2_val.txt",
+        default="/path/scannet/meta_data/scannet_train.txt",
         help='The path of the file that stores the scan names.')
     parser.add_argument(
         '--test_scan_names_file',
