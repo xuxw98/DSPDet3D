@@ -37,7 +37,7 @@ def export_one_scan(scan_name,
     # includes axisAlignment info for the train set scans.
     meta_file = osp.join(scannet_dir, scan_name, f'{scan_name}.txt')
     mesh_vertices, semantic_labels, instance_labels, unaligned_bboxes, \
-        aligned_bboxes, instance2semantic, axis_align_matrix, unaligned_bboxes_sem, aligned_bboxes_sem = export(
+        aligned_bboxes, instance2semantic, axis_align_matrix = export(
             mesh_file, agg_file, seg_file, meta_file, label_map_file, None,
             test_mode)
 
