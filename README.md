@@ -42,7 +42,7 @@ Visualization results on ScanNet:
 
 Visualization results on Matterport3D:
 
-![vis](./images/vis2.png)
+![vis2](./images/vis2.png)
 
 
 ## Acknowledgement
