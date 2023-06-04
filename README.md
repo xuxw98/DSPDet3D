@@ -8,6 +8,11 @@ This repo contains PyTorch implementation for paper [DSPDet3D: Dynamic Spatial P
 > [Xiuwei Xu](https://xuxw98.github.io/), Zhihao Sun, [Ziwei Wang](https://ziweiwangthu.github.io/), Hongmin Liu, [Jie Zhou](https://scholar.google.com/citations?user=6a79aPwAAAAJ&hl=en&authuser=1), [Jiwen Lu](http://ivg.au.tsinghua.edu.cn/Jiwen_Lu/)
 >
 
+![teaser](./images/teaser2.png)
+
+## Method
+Overall pipeline of DSPDet3D:
+
 ![overview](./images/framework.jpg)
 
 
@@ -31,9 +36,13 @@ Comparison with state-of-the-art methods on TO-SCENE dataset:
 
 <p align="left"><img src="./images/teaser.jpg" alt="drawing" width="70%"/></p>
 
-Visualization results on ScanNet dataset:
+Visualization results on ScanNet:
 
 ![vis](./images/vis.png)
+
+Visualization results on Matterport3D:
+
+![vis](./images/vis2.png)
 
 
 ## Acknowledgement
