@@ -10,6 +10,10 @@ This repo contains PyTorch implementation for paper [DSPDet3D: Dynamic Spatial P
 
 ![teaser](./images/teaser2.png)
 
+## News
+- [2023/6/04]: We transfer DSPDet3D to extremely large scenes and show great performance! Demo will be released in our [project page](https://xuxw98.github.io/DSPDet3D/).
+- [2023/5/01]: Code release.
+
 ## Method
 Overall pipeline of DSPDet3D:
 
