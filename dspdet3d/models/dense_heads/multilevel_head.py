@@ -46,6 +46,7 @@ class DSPHead(BaseModule):
         self.volume_threshold = volume_threshold
         self.r = r
         self.prune_threshold = prune_threshold
+        self.keep_loss_weight = keep_loss_weight
         self.assigner = build_assigner(assigner)
         self.bbox_loss = build_loss(bbox_loss)
         self.cls_loss = build_loss(cls_loss)
@@ -112,6 +113,10 @@ class DSPHead(BaseModule):
             self.__setattr__(
                         f'out_block_{i}',
                         self.make_block(in_channels[i], out_channels))
+        # ######only train keep_head  
+        # for name, param in self.named_parameters():
+        #     if "keep_conv" not in name:
+        #         param.requires_grad=False
 
 
     def init_weights(self):
@@ -173,7 +178,16 @@ class DSPHead(BaseModule):
                 bboxes_level.append(bbox_level)
                 bbox_state = torch.cat((bbox_level, bbox_state), dim=1)
                 bboxes_state.append(bbox_state)
-
+        elif self.assign_type == 'label':
+            for idx in range(len(img_metas)):
+                bbox = gt_bboxes[idx]
+                bbox_label = gt_labels[idx]
+                label2level = gt_labels[idx].new_tensor(self.label2level)
+                bbox_state = torch.cat((bbox.gravity_center, bbox.tensor[:, 3:]), dim=1)
+                bbox_level = label2level[bbox_label].to(bbox_state.device).unsqueeze(1)
+                bboxes_level.append(bbox_level)
+                bbox_state = torch.cat((bbox_level, bbox_state), dim=1)
+                bboxes_state.append(bbox_state)
         bbox_preds, cls_preds, points = [], [], []
         keep_gts = []
         keep_preds, prune_masks = [], []
@@ -274,13 +288,13 @@ class DSPHead(BaseModule):
 
 
     @torch.no_grad()
-    def _get_keep_voxel(self, input, level, bboxes_state, input_metas):
+    def _get_keep_voxel(self, input, cur_level, bboxes_state, input_metas):
         bboxes = []
         for size in range(len(input_metas)):
             bboxes.append([])
         for idx in range(len(input_metas)):
             for n in range(len(bboxes_state[idx])):
-                if bboxes_state[idx][n][0] < (level - 1):    
+                if bboxes_state[idx][n][0] < (cur_level - 1):    
                     bboxes[idx].append(bboxes_state[idx][n])
         idx = 0
         mask = []
@@ -291,7 +305,7 @@ class DSPHead(BaseModule):
                 point = input.coordinates[permutation][:, 1:] * self.voxel_size
                 boxes = bboxes[idx]
                 level = 3
-                bboxes_level = [[] for _ in range(level)]                  
+                bboxes_level = [[] for _ in range(level)]
                 for n in range(len(boxes)):
                     for l in range(level):
                         if boxes[n][0] == l:
@@ -309,13 +323,14 @@ class DSPHead(BaseModule):
                         shift = rotation_3d_in_axis(
                             shift, -boxes_l[0, :, 7], axis=2).permute(1, 0, 2)
                         centers = boxes_l[..., 1:4] + shift
-                        up_level_l = (self.r + 1) / 2
-                        dx_min = centers[..., 0] - boxes_l[..., 1] + (up_level_l * l0 * 2 ** (l + 1)) / 2  # + boxes[..., 4] / 2
-                        dx_max = boxes_l[..., 1] - centers[..., 0] + (up_level_l * l0 * 2 ** (l + 1)) / 2  # level-2
-                        dy_min = centers[..., 1] - boxes_l[..., 2] + (up_level_l * l0 * 2 ** (l + 1)) / 2  # boxes[..., 5] / 2
-                        dy_max = boxes_l[..., 2] - centers[..., 1] + (up_level_l * l0 * 2 ** (l + 1)) / 2
-                        dz_min = centers[..., 2] - boxes_l[..., 3] + (up_level_l * l0 * 2 ** (l + 1)) / 2  # boxes[..., 6] / 2
-                        dz_max = boxes_l[..., 3] - centers[..., 2] + (up_level_l * l0 * 2 ** (l + 1)) / 2
+                        up_level_l = self.r 
+                        dx_min = centers[..., 0] - boxes_l[..., 1] + (up_level_l * l0 * 2 ** (cur_level - 1)) / 2  
+                        dx_max = boxes_l[..., 1] - centers[..., 0] + (up_level_l * l0 * 2 ** (cur_level - 1)) / 2 
+                        dy_min = centers[..., 1] - boxes_l[..., 2] + (up_level_l * l0 * 2 ** (cur_level - 1)) / 2  
+                        dy_max = boxes_l[..., 2] - centers[..., 1] + (up_level_l * l0 * 2 ** (cur_level - 1)) / 2
+                        dz_min = centers[..., 2] - boxes_l[..., 3] + (up_level_l * l0 * 2 ** (cur_level - 1)) / 2  
+                        dz_max = boxes_l[..., 3] - centers[..., 2] + (up_level_l * l0 * 2 ** (cur_level - 1)) / 2
+
 
                         distance = torch.stack((dx_min, dx_max, dy_min, dy_max, dz_min, dz_max), dim=-1)
                         inside_box_condition = distance.min(dim=-1).values > 0
@@ -475,7 +490,7 @@ class DSPHead(BaseModule):
         return dict(
             bbox_loss=torch.mean(torch.cat(bbox_losses)),
             cls_loss=torch.sum(torch.cat(cls_losses)) / torch.sum(torch.cat(pos_masks)),
-            keep_loss=0.01 * keep_losses / len(img_metas))  
+            keep_loss=self.keep_loss_weight * keep_losses / len(img_metas)) 
 
 
     def forward_train(self, x, gt_bboxes, gt_labels, img_metas):
@@ -631,7 +646,7 @@ class DSPAssigner:
         boxes = torch.cat((gt_bboxes.gravity_center, gt_bboxes.tensor[:, 3:]), dim=1)
         boxes = boxes.to(points.device).expand(n_points, n_boxes, 7)
         points = points.unsqueeze(1).expand(n_points, n_boxes, 3)
-
+           
         # condition 1: fix level for label
         bboxes_level = bboxes_level.squeeze(1)
         label_levels = bboxes_level.unsqueeze(0).expand(n_points, n_boxes).to(points.device)
@@ -641,6 +656,27 @@ class DSPAssigner:
         # condition 2: keep topk location per box by center distance
         center = boxes[..., :3]
         center_distances = torch.sum(torch.pow(center - points, 2), dim=-1)
+        ######3X3X3 limit
+        L0 = 0.01 * 2**2
+        p = 7   
+        level_box_l = p * (L0 * 2 ** bboxes_level).unsqueeze(0).expand(n_points, n_boxes).unsqueeze(2).to(points.device)
+        level_box = torch.cat((center,level_box_l),dim=2)
+        shift = torch.stack((
+            points[..., 0] - level_box[..., 0],
+            points[..., 1] - level_box[..., 1],
+            points[..., 2] - level_box[..., 2]
+        ), dim=-1)
+        level_centers = level_box[..., :3] + shift
+        dx_min = level_centers[..., 0] - level_box[..., 0] + level_box[..., 3] / 2
+        dx_max = level_box[..., 0] + level_box[..., 3] / 2 - level_centers[..., 0]
+        dy_min = level_centers[..., 1] - level_box[..., 1] + level_box[..., 3] / 2
+        dy_max = level_box[..., 1] + level_box[..., 3] / 2 - level_centers[..., 1]
+        dz_min = level_centers[..., 2] - level_box[..., 2] + level_box[..., 3] / 2
+        dz_max = level_box[..., 2] + level_box[..., 3] / 2 - level_centers[..., 2]
+        level_bbox_targets = torch.stack((dx_min, dx_max, dy_min, dy_max, dz_min, dz_max), dim=-1)
+        inside_level_bbox_mask = level_bbox_targets[..., :6].min(-1)[0] > 0
+        center_distances = torch.where(inside_level_bbox_mask, center_distances, float_max)
+        #######
         center_distances = torch.where(level_condition, center_distances, float_max)
         topk_distances = torch.topk(center_distances,
                                     min(self.top_pts_threshold + 1, len(center_distances)),
