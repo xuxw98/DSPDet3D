@@ -1,8 +1,8 @@
-# DSPDet3D: Dynamic Spatial Pruning for 3D Small Object Detection
+# 3D Small Object Detection with Dynamic Spatial Pruning
 
 ## Introduction
 
-This repo contains PyTorch implementation for paper [DSPDet3D: Dynamic Spatial Pruning for 3D Small Object Detection](https://arxiv.org/abs/2305.03716) based on [MMDetection3D](https://github.com/open-mmlab/mmdetection3d).
+This repo contains PyTorch implementation for paper [3D Small Object Detection with Dynamic Spatial Pruning](https://arxiv.org/abs/2305.03716) based on [MMDetection3D](https://github.com/open-mmlab/mmdetection3d).
 
 > DSPDet3D: Dynamic Spatial Pruning for 3D Small Object Detection  
 > [Xiuwei Xu](https://xuxw98.github.io/), Zhihao Sun, [Ziwei Wang](https://ziweiwangthu.github.io/), Hongmin Liu, [Jie Zhou](https://scholar.google.com/citations?user=6a79aPwAAAAJ&hl=en&authuser=1), [Jiwen Lu](http://ivg.au.tsinghua.edu.cn/Jiwen_Lu/)
@@ -17,7 +17,7 @@ This repo contains PyTorch implementation for paper [DSPDet3D: Dynamic Spatial P
 ## Method
 Overall pipeline of DSPDet3D:
 
-![overview](./images/framework.jpg)
+![overview](./images/pipeline.png)
 
 
 ## Getting Started
@@ -38,7 +38,7 @@ We provide the checkpoints for quick reproduction of the results reported in the
 
 Comparison with state-of-the-art methods on TO-SCENE dataset:
 
-<p align="left"><img src="./images/teaser.jpg" alt="drawing" width="70%"/></p>
+<p align="left"><img src="./images/teaser.png" alt="drawing" width="70%"/></p>
 
 Visualization results on ScanNet:
 
@@ -58,7 +58,7 @@ If this work is helpful for your research, please consider citing the following 
 
 ```
 @article{xu2023dsp, 
-      title={DSPDet3D: Dynamic Spatial Pruning for 3D Small Object Detection}, 
+      title={3D Small Object Detection with Dynamic Spatial Pruning}, 
       author={Xiuwei Xu and Zhihao Sun and Ziwei Wang and Hongmin Liu and Jie Zhou and Jiwen Lu},
       journal={arXiv preprint arXiv:2305.03716},
       year={2023}
