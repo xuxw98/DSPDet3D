@@ -50,6 +50,14 @@ Comparison with state-of-the-art methods on TO-SCENE dataset:
 
 <p align="left"><img src="./images/teaser.png" alt="drawing" width="70%"/></p>
 
+Visualization results on ScanNet:
+
+![vis](./images/vis.png)
+
+Visualization results on Matterport3D:
+
+![vis2](./images/vis2.png)
+
 
 ## Acknowledgement
 We thank a lot for the flexible codebase of [FCAF3D](https://github.com/SamsungLabs/fcaf3d) and valuable datasets provided by [ScanNet](https://github.com/ScanNet/ScanNet) and [TO-SCENE](https://github.com/GAP-LAB-CUHK-SZ/TO-Scene).
