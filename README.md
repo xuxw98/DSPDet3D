@@ -27,7 +27,11 @@ For data preparation and environment setup:
 - [Prepare Dataset](docs/data.md)
 
 For training and evaluation:
-- [Train, Eval and Visualize](docs/run.md)
+- [Train and Eval](docs/run.md)
+
+
+## Try DSPDet3D on Your Own Data
+Will be finished in a week.
 
 
 ## Main Results
