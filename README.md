@@ -30,8 +30,13 @@ For training and evaluation:
 - [Train and Eval](docs/run.md)
 
 
-## Try DSPDet3D on Your Own Data
-Will be finished in a week.
+## Demo
+The demo code will download weights and an example scene first and then visualize prediction results.
+
+| Dataset  | Scannet                  | Matterport3D                  |
+|:--------:|:------------------------:|:-------------------------:|
+| Command  | `python -m demo.scannet` | `python -m demo.mp3d` |
+| Result   | ![vis](./images/vis.png)    | ![vis2](./images/vis2.png)    |
 
 
 ## Main Results
@@ -44,14 +49,6 @@ We provide the checkpoints for quick reproduction of the results reported in the
 Comparison with state-of-the-art methods on TO-SCENE dataset:
 
 <p align="left"><img src="./images/teaser.png" alt="drawing" width="70%"/></p>
-
-Visualization results on ScanNet:
-
-![vis](./images/vis.png)
-
-Visualization results on Matterport3D:
-
-![vis2](./images/vis2.png)
 
 
 ## Acknowledgement
