@@ -11,6 +11,7 @@ This repo contains PyTorch implementation for paper [3D Small Object Detection w
 ![teaser](./images/teaser2.png)
 
 ## News
+- [2024/7/01]: DSPDet3D is accepted to ECCV 2024!
 - [2023/6/04]: We transfer DSPDet3D to extremely large scenes and show great performance! Demo will be released in our [project page](https://xuxw98.github.io/DSPDet3D/).
 - [2023/5/01]: Code release.
 
