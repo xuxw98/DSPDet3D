@@ -43,8 +43,8 @@ The demo code will download weights and an example scene first and then visualiz
 We provide the checkpoints for quick reproduction of the results reported in the paper. The pruning threshold can be adjusted freely to tradeoff between accuracy and efficiency without any finetuning.
  Benchmark | mAP@0.25 | mAP@0.5 | Downloads |
  :----: | :----: | :----: | :----: |
- [ScanNet-md40](https://github.com/wyf-ACCEPT/BackToReality) | 65.25 | 53.66 | [model](https://cloud.tsinghua.edu.cn/f/bd49db94cb7548beba63/?dl=1)
- [TO-SCENE-down](https://github.com/GAP-LAB-CUHK-SZ/TO-Scene) | 63.67 | 55.71 | [model](https://cloud.tsinghua.edu.cn/f/0e425d5d053b46c18b73/?dl=1)
+ [ScanNet-md40](https://github.com/wyf-ACCEPT/BackToReality) | 65.04 | 54.35 | [model](https://cloud.tsinghua.edu.cn/f/bd49db94cb7548beba63/?dl=1)
+ [TO-SCENE-down](https://github.com/GAP-LAB-CUHK-SZ/TO-Scene) | 66.12 | 58.55 | [model](https://cloud.tsinghua.edu.cn/f/0e425d5d053b46c18b73/?dl=1)
 
 Comparison with state-of-the-art methods on TO-SCENE dataset:
 
