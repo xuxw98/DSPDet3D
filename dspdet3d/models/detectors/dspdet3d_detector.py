@@ -65,7 +65,7 @@ class DSPDet3D(Base3DDetector):
             SparseTensor: Voxelized point clouds.
         """
         coordinates, features = ME.utils.batch_sparse_collate(
-                [(p[:, :3] / self.voxel_size, p[:, 3:] if p.shape[1] > 3 else p[:, :3]) for p in points],
+                [(p[:, :3] / self.voxel_size, p[:, :3]) for p in points],
                 device=points[0].device)
         x = ME.SparseTensor(coordinates=coordinates, features=features)
         x = self.backbone(x)
