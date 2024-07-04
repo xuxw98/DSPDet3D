@@ -31,8 +31,8 @@ For training and evaluation:
 
 
 ## Demo
-You can try our demo with class-agnostic DSPDet3D. Please download checkpoint from [HERE](https://cloud.tsinghua.edu.cn/f/96549c23580b478a9c64/?dl=1) and move it to `demo` folder.
-We provide two demo scenes from ScanNet and Matterport3D. You can download ([ScanNet](), [Matterport3D]()) and also put them into `demo` folder. 
+This is a tutorial on how to use class-agnostic DSPDet3D on custom data and visualize the results. Please download checkpoint from [HERE](https://cloud.tsinghua.edu.cn/f/96549c23580b478a9c64/?dl=1) and move it to `demo` folder.
+We provide two demo scenes from ScanNet and Matterport3D. You can download ([ScanNet](https://cloud.tsinghua.edu.cn/f/12fad2697c1644769187/?dl=1), [Matterport3D](https://cloud.tsinghua.edu.cn/f/f6c1446c0e1a437b9b2c/?dl=1)) and also put them into `demo` folder. 
 Then run the following command for detection and visualization.
 
 | Dataset  | Scannet                  | Matterport3D                  |
@@ -40,11 +40,11 @@ Then run the following command for detection and visualization.
 | Command  | `bash demo/demo.sh demo/scannet.ply demo/config_room.py` | `bash demo/demo.sh demo/mp3d.ply demo/config_building.py` |
 | Result   | ![vis](./images/demo_vis1.png)    | ![vis2](./images/demo_vis2.png)    |
 
-You can also try DSPDet3D with your own data in ply format. Run
+You can also try DSPDet3D on your own data in ply format. Run
 ```
 bash demo/demo.sh /path/to/your/ply demo/config_{}.py
 ```
-For room-size scenes, use `config_room.py`. For building-level scenes, use `config_building.py`.
+We use different hyperparamters of 3D NMS for different scales of scenes. For room-size scenes, use `config_room.py`. For building-level scenes, use `config_building.py`. You can also adjust the `prune_threshold` in the config file to tradeoff between accuracy and efficiency.
 
 
 ## Main Results
