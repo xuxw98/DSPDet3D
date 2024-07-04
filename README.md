@@ -31,11 +31,13 @@ For training and evaluation:
 
 
 ## Demo
-The demo code will download weights and an example scene first and then visualize prediction results.
+You can try class-agnostic DSPDet3D on your own data (point clouds in .ply format). Please download checkpoint from [HERE](https://cloud.tsinghua.edu.cn/f/96549c23580b478a9c64/?dl=1) and move it to `demo` folder.
+We provide two demo scenes from ScanNet and Matterport3D. You can download ([ScanNet](), [Matterport3D]()) and put them into `demo` folder. 
+Run following command to detect and visualize.
 
 | Dataset  | Scannet                  | Matterport3D                  |
 |:--------:|:------------------------:|:-------------------------:|
-| Command  | `python -m demo.scannet` | `python -m demo.mp3d` |
+| Command  | `python demo/demo.py --data scannet.ply` | `python demo/demo.py --data mp3d.ply` |
 | Result   | ![vis](./images/vis.png)    | ![vis2](./images/vis2.png)    |
 
 
