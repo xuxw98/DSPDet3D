@@ -37,7 +37,7 @@ Then run the following command for detection and visualization.
 
 | Dataset  | Scannet                  | Matterport3D                  |
 |:--------:|:------------------------:|:-------------------------:|
-| Command  | `python demo/demo.py --data scannet.ply` | `python demo/demo.py --data mp3d.ply` |
+| Command  | `bash demo/demo.sh demo/scannet.ply demo/config_room.py` | `bash demo/demo.sh demo/mp3d.ply demo/config_building.py` |
 | Result   | ![vis](./images/demo_vis1.png)    | ![vis2](./images/demo_vis2.png)    |
 
 You can specify your own ply file with the `--data` option.
