@@ -40,6 +40,8 @@ Then run the following command for detection and visualization.
 | Command  | `python demo/demo.py --data scannet.ply` | `python demo/demo.py --data mp3d.ply` |
 | Result   | ![vis](./images/vis.png)    | ![vis2](./images/vis2.png)    |
 
+You can specify your own ply file with the `--data` option.
+
 
 ## Main Results
 We provide the checkpoints for quick reproduction of the results reported in the paper. The pruning threshold can be adjusted freely to tradeoff between accuracy and efficiency without any finetuning.
