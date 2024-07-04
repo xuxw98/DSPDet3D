@@ -32,8 +32,8 @@ For training and evaluation:
 
 ## Demo
 You can try class-agnostic DSPDet3D on your own data (point clouds in .ply format). Please download checkpoint from [HERE](https://cloud.tsinghua.edu.cn/f/96549c23580b478a9c64/?dl=1) and move it to `demo` folder.
-We provide two demo scenes from ScanNet and Matterport3D. You can download ([ScanNet](), [Matterport3D]()) and put them into `demo` folder. 
-Run following command to detect and visualize.
+We provide two demo scenes from ScanNet and Matterport3D. You can download ([ScanNet](), [Matterport3D]()) and also put them into `demo` folder. 
+Then run the following command for detection and visualization.
 
 | Dataset  | Scannet                  | Matterport3D                  |
 |:--------:|:------------------------:|:-------------------------:|
