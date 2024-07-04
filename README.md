@@ -31,7 +31,7 @@ For training and evaluation:
 
 
 ## Demo
-You can try class-agnostic DSPDet3D on your own data (point clouds in .ply format). Please download checkpoint from [HERE](https://cloud.tsinghua.edu.cn/f/96549c23580b478a9c64/?dl=1) and move it to `demo` folder.
+You can try our demo with class-agnostic DSPDet3D. Please download checkpoint from [HERE](https://cloud.tsinghua.edu.cn/f/96549c23580b478a9c64/?dl=1) and move it to `demo` folder.
 We provide two demo scenes from ScanNet and Matterport3D. You can download ([ScanNet](), [Matterport3D]()) and also put them into `demo` folder. 
 Then run the following command for detection and visualization.
 
@@ -40,7 +40,11 @@ Then run the following command for detection and visualization.
 | Command  | `bash demo/demo.sh demo/scannet.ply demo/config_room.py` | `bash demo/demo.sh demo/mp3d.ply demo/config_building.py` |
 | Result   | ![vis](./images/demo_vis1.png)    | ![vis2](./images/demo_vis2.png)    |
 
-You can specify your own ply file with the `--data` option.
+You can also try DSPDet3D with your own data in ply format. Run
+```
+bash demo/demo.sh /path/to/your/ply demo/config_{}.py
+```
+For room-size scenes, use `config_room.py`. For building-level scenes, use `config_building.py`.
 
 
 ## Main Results
