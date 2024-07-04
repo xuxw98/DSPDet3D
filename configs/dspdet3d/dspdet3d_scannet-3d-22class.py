@@ -19,7 +19,7 @@ model = dict(
         ),
         assign_type='volume',
         volume_threshold=27,
-        r=13,
+        r=7,
         prune_threshold=0.3,
         bbox_loss=dict(type='AxisAlignedIoULoss2', mode='diou', reduction='none')),
     train_cfg=dict(),
