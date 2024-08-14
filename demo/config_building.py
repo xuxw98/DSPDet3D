@@ -21,7 +21,6 @@ model = dict(
         volume_threshold=27,
         r=7,
         prune_threshold=0.3,
-        keep_loss_weight=0.01,
         bbox_loss=dict(type='AxisAlignedIoULoss2', mode='diou', reduction='none')),
     train_cfg=dict(),
     test_cfg=dict(nms_pre=1000, iou_thr=.5, score_thr=.01))
