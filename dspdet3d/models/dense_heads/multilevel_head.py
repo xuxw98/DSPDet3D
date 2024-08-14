@@ -46,7 +46,6 @@ class DSPHead(BaseModule):
         self.volume_threshold = volume_threshold
         self.r = r
         self.prune_threshold = prune_threshold
-        self.keep_loss_weight = keep_loss_weight
         self.assigner = build_assigner(assigner)
         self.bbox_loss = build_loss(bbox_loss)
         self.cls_loss = build_loss(cls_loss)
@@ -490,7 +489,7 @@ class DSPHead(BaseModule):
         return dict(
             bbox_loss=torch.mean(torch.cat(bbox_losses)),
             cls_loss=torch.sum(torch.cat(cls_losses)) / torch.sum(torch.cat(pos_masks)),
-            keep_loss=self.keep_loss_weight * keep_losses / len(img_metas)) 
+            keep_loss=0.01 * keep_losses / len(img_metas)) 
 
 
     def forward_train(self, x, gt_bboxes, gt_labels, img_metas):
