@@ -14,7 +14,7 @@ model = dict(
         voxel_size=voxel_size,
         pts_prune_threshold=100000,
         assigner=dict(
-            type='DSPAssignerV2',
+            type='DSPAssigner',
             top_pts_threshold=6,    #3,6,9,12
         ),
         assign_type='volume',           ###'volume'       'label'
